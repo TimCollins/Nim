@@ -7,6 +7,8 @@ namespace ConsoleApp
         public static int HeapA { get; set; }
         public static int HeapB { get; set; }
         public static int HeapC { get; set; }
+        public static string HeapInput { get; set; }
+        public static int HeapAmount { get; set; }
 
         static void Main(string[] args)
         {
@@ -23,10 +25,41 @@ namespace ConsoleApp
                     Console.WriteLine("\"{0}\" is invalid. Please try again", input);
                     input = GetInput();
                 }
-                done = true;
+
+                ProcessInput();
+
+                if (AllHeapsEmpty())
+                {
+                    done = true;
+                }
             }
 
             ConsoleUtils.WaitForEscape();
+        }
+
+        private static bool AllHeapsEmpty()
+        {
+            return HeapA == 0 && HeapB == 0 && HeapC == 0;
+        }
+
+        private static void ProcessInput()
+        {
+            if (HeapInput == "A")
+            {
+                HeapA -= HeapAmount;
+                return;
+            }
+
+            if (HeapInput == "B")
+            {
+                HeapB -= HeapAmount;
+                return;
+            }
+
+            if (HeapInput == "C")
+            {
+                HeapC -= HeapAmount;
+            }
         }
 
         private static bool IsValid(string input)
@@ -41,15 +74,30 @@ namespace ConsoleApp
                 return false;
             }
 
-            var heap = input[0].ToString().ToUpper();
+            HeapInput = input[0].ToString().ToUpper();
 
-            if (heap != "A" && heap != "B" && heap != "C")
+            if (HeapInput != "A" && HeapInput != "B" && HeapInput != "C")
             {
                 return false;
             }
 
-            var amount = Convert.ToInt32(input[1].ToString());
-            if (amount < 1 || amount > 3)
+            HeapAmount = Convert.ToInt32(input[1].ToString());
+            if (HeapAmount < 1 || HeapAmount > 3)
+            {
+                return false;
+            }
+
+            if (HeapInput == "A" && HeapA - HeapAmount < 0)
+            {
+                return false;
+            }
+
+            if (HeapInput == "B" && HeapB - HeapAmount < 0)
+            {
+                return false;
+            }
+
+            if (HeapInput == "C" && HeapC - HeapAmount < 0)
             {
                 return false;
             }
