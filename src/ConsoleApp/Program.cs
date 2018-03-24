@@ -12,15 +12,16 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            var done = false;
+            var game = new GameService();
+            game.InitGame();
 
-            InitGame();
+            var done = false;
             while (!done)
             {
                 DisplayInfoScreen();
                 var input = GetInput();
 
-                while (!IsValid(input))
+                while (!game.IsValidInput(input))
                 {
                     Console.WriteLine("\"{0}\" is invalid. Please try again", input);
                     input = GetInput();
@@ -62,61 +63,11 @@ namespace ConsoleApp
             }
         }
 
-        private static bool IsValid(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return false;
-            }
-
-            if (input.Length != 2)
-            {
-                return false;
-            }
-
-            HeapInput = input[0].ToString().ToUpper();
-
-            if (HeapInput != "A" && HeapInput != "B" && HeapInput != "C")
-            {
-                return false;
-            }
-
-            HeapAmount = Convert.ToInt32(input[1].ToString());
-            if (HeapAmount < 1 || HeapAmount > 3)
-            {
-                return false;
-            }
-
-            if (HeapInput == "A" && HeapA - HeapAmount < 0)
-            {
-                return false;
-            }
-
-            if (HeapInput == "B" && HeapB - HeapAmount < 0)
-            {
-                return false;
-            }
-
-            if (HeapInput == "C" && HeapC - HeapAmount < 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         private static string GetInput()
         {
             Console.WriteLine("\nEnter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
             Console.Write("\n> ");
             return Console.ReadLine();
-        }
-
-        private static void InitGame()
-        {
-            HeapA = 3;
-            HeapB = 4;
-            HeapC = 5;
         }
 
         private static void DisplayInfoScreen()
