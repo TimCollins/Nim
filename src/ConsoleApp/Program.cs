@@ -27,7 +27,8 @@ namespace ConsoleApp
                     input = GetInput();
                 }
 
-                ProcessInput();
+                game.SaveInput(input);
+                game.ProcessInput();
 
                 if (game.AllHeapsEmpty())
                 {
@@ -38,25 +39,6 @@ namespace ConsoleApp
             ConsoleUtils.WaitForEscape();
         }
         
-        private static void ProcessInput()
-        {
-            if (HeapInput == "A")
-            {
-                HeapA -= HeapAmount;
-                return;
-            }
-
-            if (HeapInput == "B")
-            {
-                HeapB -= HeapAmount;
-                return;
-            }
-
-            if (HeapInput == "C")
-            {
-                HeapC -= HeapAmount;
-            }
-        }
 
         private static string GetInput()
         {

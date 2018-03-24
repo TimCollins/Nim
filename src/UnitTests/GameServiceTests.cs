@@ -46,5 +46,28 @@ namespace UnitTests
             Assert.IsFalse(Game.AllHeapsEmpty());
         }
 
+        [Test]
+        public void HeapShouldBeDecrementedWhenSpecifiedByName()
+        {
+            var input = "a2";
+
+            Game.InitGame(5, 6, 7);
+            Game.SaveInput(input);
+            Game.ProcessInput();
+
+            Assert.AreEqual(3, Game.HeapA);
+
+            input = "b3";
+            Game.SaveInput(input);
+            Game.ProcessInput();
+
+            Assert.AreEqual(3, Game.HeapB);
+
+            input = "c1";
+            Game.SaveInput(input);
+            Game.ProcessInput();
+
+            Assert.AreEqual(6, Game.HeapC);
+        }
     }
 }

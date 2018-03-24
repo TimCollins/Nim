@@ -24,6 +24,12 @@ namespace ConsoleApp
             HeapC = c;
         }
 
+        public void SaveInput(string input)
+        {
+            HeapInput = input[0].ToString().ToUpper();
+            HeapAmount = Convert.ToInt32(input[1].ToString());
+        }
+        
         public bool IsValidInput(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -36,30 +42,30 @@ namespace ConsoleApp
                 return false;
             }
 
-            HeapInput = input[0].ToString().ToUpper();
+            var heapInput = input[0].ToString().ToUpper();
 
-            if (HeapInput != "A" && HeapInput != "B" && HeapInput != "C")
+            if (heapInput != "A" && heapInput != "B" && heapInput != "C")
             {
                 return false;
             }
 
-            HeapAmount = Convert.ToInt32(input[1].ToString());
-            if (HeapAmount < 1 || HeapAmount > 3)
+            var heapAmount = Convert.ToInt32(input[1].ToString());
+            if (heapAmount < 1 || heapAmount > 3)
             {
                 return false;
             }
 
-            if (HeapInput == "A" && HeapA - HeapAmount < 0)
+            if (heapInput == "A" && HeapA - heapAmount < 0)
             {
                 return false;
             }
 
-            if (HeapInput == "B" && HeapB - HeapAmount < 0)
+            if (heapInput == "B" && HeapB - heapAmount < 0)
             {
                 return false;
             }
 
-            if (HeapInput == "C" && HeapC - HeapAmount < 0)
+            if (heapInput == "C" && HeapC - heapAmount < 0)
             {
                 return false;
             }
@@ -70,6 +76,26 @@ namespace ConsoleApp
         public bool AllHeapsEmpty()
         {
             return HeapA == 0 && HeapB == 0 && HeapC == 0;
+        }
+
+        public void ProcessInput()
+        {
+            if (HeapInput == "A")
+            {
+                HeapA -= HeapAmount;
+                return;
+            }
+
+            if (HeapInput == "B")
+            {
+                HeapB -= HeapAmount;
+                return;
+            }
+
+            if (HeapInput == "C")
+            {
+                HeapC -= HeapAmount;
+            }
         }
     }
 }
