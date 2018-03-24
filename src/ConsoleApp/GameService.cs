@@ -66,5 +66,10 @@ namespace ConsoleApp
 
             return true;
         }
+
+        public bool AllHeapsEmpty()
+        {
+            return HeapA == 0 && HeapB == 0 && HeapC == 0;
+        }
     }
 }

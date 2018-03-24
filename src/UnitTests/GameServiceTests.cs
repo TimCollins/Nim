@@ -6,28 +6,44 @@ namespace UnitTests
     [TestFixture]
     public class GameServiceTests
     {
+        public GameService Game { get; set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            Game = new GameService();
+        }
+
         [Test]
         public void DefaultHeapValuesShouldBeSetOnInit()
         {
-            var game = new GameService();
+            Game.InitGame();
 
-            game.InitGame();
-
-            Assert.AreEqual(game.HeapA, 3);
-            Assert.AreEqual(game.HeapB, 4);
-            Assert.AreEqual(game.HeapC, 5);
+            Assert.AreEqual(Game.HeapA, 3);
+            Assert.AreEqual(Game.HeapB, 4);
+            Assert.AreEqual(Game.HeapC, 5);
         }
 
         [Test]
         public void SpecificHeapValuesShouldBeSetOnInit()
         {
-            var game = new GameService();
+            Game.InitGame(7, 8, 9);
 
-            game.InitGame(7, 8, 9);
+            Assert.AreEqual(Game.HeapA, 7);
+            Assert.AreEqual(Game.HeapB, 8);
+            Assert.AreEqual(Game.HeapC, 9);
+        }
 
-            Assert.AreEqual(game.HeapA, 7);
-            Assert.AreEqual(game.HeapB, 8);
-            Assert.AreEqual(game.HeapC, 9);
+        [Test]
+        public void AllHeapsAreEmptyWhenEachValueIsZero()
+        {
+            Game.InitGame(0, 0, 0);
+
+            Assert.IsTrue(Game.AllHeapsEmpty());
+
+            Game.InitGame(1, 2, 3);
+
+            Assert.IsFalse(Game.AllHeapsEmpty());
         }
 
     }

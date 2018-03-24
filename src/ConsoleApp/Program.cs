@@ -29,7 +29,7 @@ namespace ConsoleApp
 
                 ProcessInput();
 
-                if (AllHeapsEmpty())
+                if (game.AllHeapsEmpty())
                 {
                     done = true;
                 }
@@ -37,12 +37,7 @@ namespace ConsoleApp
 
             ConsoleUtils.WaitForEscape();
         }
-
-        private static bool AllHeapsEmpty()
-        {
-            return HeapA == 0 && HeapB == 0 && HeapC == 0;
-        }
-
+        
         private static void ProcessInput()
         {
             if (HeapInput == "A")
