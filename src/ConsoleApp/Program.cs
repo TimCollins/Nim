@@ -4,16 +4,12 @@ namespace ConsoleApp
 {
     class Program
     {
-        public static int HeapA { get; set; }
-        public static int HeapB { get; set; }
-        public static int HeapC { get; set; }
-        public static string HeapInput { get; set; }
-        public static int HeapAmount { get; set; }
+        public static GameService Game { get; set; }
 
         static void Main(string[] args)
         {
-            var game = new GameService();
-            game.InitGame();
+            Game = new GameService();
+            Game.InitGame();
 
             var done = false;
             while (!done)
@@ -21,16 +17,16 @@ namespace ConsoleApp
                 DisplayInfoScreen();
                 var input = GetInput();
 
-                while (!game.IsValidInput(input))
+                while (!Game.IsValidInput(input))
                 {
                     Console.WriteLine("\"{0}\" is invalid. Please try again", input);
                     input = GetInput();
                 }
 
-                game.SaveInput(input);
-                game.ProcessInput();
+                Game.SaveInput(input);
+                Game.ProcessInput();
 
-                if (game.AllHeapsEmpty())
+                if (Game.AllHeapsEmpty())
                 {
                     done = true;
                 }
@@ -39,7 +35,6 @@ namespace ConsoleApp
             ConsoleUtils.WaitForEscape();
         }
         
-
         private static string GetInput()
         {
             Console.WriteLine("\nEnter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
@@ -52,7 +47,7 @@ namespace ConsoleApp
             Console.Clear();
             Console.WriteLine("Nim Game\n--------\nBe the last to take an object!\n");
             Console.WriteLine("\nSize of heaps\nA\tB\tC");
-            Console.WriteLine("{0}\t{1}\t{2}", HeapA, HeapB, HeapC);
+            Console.WriteLine("{0}\t{1}\t{2}", Game.HeapA, Game.HeapB, Game.HeapC);
         }
     }
 }
