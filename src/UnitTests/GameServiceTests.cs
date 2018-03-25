@@ -78,5 +78,46 @@ namespace UnitTests
 
             Assert.Throws<ApplicationException>(() => Game.ProcessInput());
         }
+
+        [Test]
+        public void CurrentPlayerShouldBe1ByDefaultWithInputParams()
+        {
+            Game.InitGame();
+
+            Assert.AreEqual(1, Game.Player);
+        }
+
+        [Test]
+        public void CurrentPlayerShouldBe1ByDefaultWithoutInputParams()
+        {
+            Game.InitGame(4, 5, 6);
+
+            Assert.AreEqual(1, Game.Player);
+        }
+
+        [Test]
+        public void CurrentPlayerShouldChangeIfHeapsNotEmpty()
+        {
+            Game.InitGame(4, 5, 6);
+            Game.UpdatePlayer();
+
+            Assert.AreEqual(2, Game.Player);
+
+            Game.UpdatePlayer();
+
+            Assert.AreEqual(1, Game.Player);
+        }
+
+        [Test]
+        public void CurrentPlayerShouldNotChangeIfHeapsEmpty()
+        {
+            Game.InitGame();
+            Game.HeapA = Game.HeapB = Game.HeapC = 0;
+
+            Game.UpdatePlayer();
+
+            Assert.AreEqual(1, Game.Player);
+        }
+
     }
 }
