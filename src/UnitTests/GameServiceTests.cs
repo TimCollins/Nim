@@ -119,5 +119,12 @@ namespace UnitTests
             Assert.AreEqual(1, Game.Player);
         }
 
+        [Test]
+        public void QuitInputShouldBeAllowed()
+        {
+            const string input = "quit";
+            Assert.IsTrue(Game.IsValidInput(input));
+        }
+
     }
 }

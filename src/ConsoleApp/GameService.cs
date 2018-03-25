@@ -42,6 +42,11 @@ namespace ConsoleApp
                 return false;
             }
 
+            if (input.ToLower() == "quit")
+            {
+                return true;
+            }
+
             if (input.Length != 2)
             {
                 return false;

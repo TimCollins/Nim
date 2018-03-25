@@ -23,6 +23,11 @@ namespace ConsoleApp
                     input = GetInput();
                 }
 
+                if (input == "quit")
+                {
+                    Environment.Exit(0);
+                }
+
                 Game.SaveInput(input);
                 Game.ProcessInput();
                 Game.UpdatePlayer();
@@ -47,6 +52,7 @@ namespace ConsoleApp
         {
             Console.WriteLine("\nPlayer {0}'s turn", Game.Player);
             Console.WriteLine("Enter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
+            Console.WriteLine("Enter \"quit\" to end the game");
             Console.Write("\n> ");
             return Console.ReadLine();
         }
