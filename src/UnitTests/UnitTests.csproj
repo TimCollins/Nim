@@ -69,6 +69,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="run-coverage.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="run-report.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="run-tests.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp\ConsoleApp.csproj">
