@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ConsoleApp
 {
@@ -10,23 +12,27 @@ namespace ConsoleApp
         public string HeapInput { get; set; }
         public int HeapAmount { get; set; }
         public int Player { get; set; }
+
+        private Random _rand;
         
         public void InitGame()
         {
-            HeapA = 3;
-            HeapB = 4;
-            HeapC = 5;
-
-            Player = 1;
+            CommonInit(3, 4, 5);
         }
 
         public void InitGame(int a, int b, int c)
+        {
+            CommonInit(a, b, c);
+        }
+
+        private void CommonInit(int a, int b, int c)
         {
             HeapA = a;
             HeapB = b;
             HeapC = c;
 
             Player = 1;
+            _rand = new Random();
         }
 
         public void SaveInput(string input)
@@ -120,6 +126,73 @@ namespace ConsoleApp
             }
 
             Player = Player == 1 ? 2 : 1;
+        }
+
+        public string GetRandomInput()
+        {
+            // The computer player will simply choose a random heap and 
+            // a random valid amount
+            var output = new StringBuilder();
+
+            // Find available non-zero heaps
+            output.Append(GetRandomHeap());
+            output.Append(GetRandomAmount(output));
+
+            return output.ToString();
+        }
+
+        private int GetRandomAmount(StringBuilder output)
+        {
+            int max;
+            var tmp = output.ToString();
+            if (tmp == "a")
+            {
+                max = HeapA;
+            }
+            else if (tmp == "b")
+            {
+                max = HeapB;
+            }
+            else
+            {
+                max = HeapC;
+            }
+
+            // Upper bound is exclusive
+            if (max > 4)
+            {
+                max = 4;
+            }
+            var amount = _rand.Next(1, max);
+            return amount;
+        }
+
+        private string GetRandomHeap()
+        {
+            var heaps = new List<string>();
+            if (HeapA > 0)
+            {
+                heaps.Add("a");
+            }
+
+            if (HeapB > 0)
+            {
+                heaps.Add("b");
+            }
+
+            if (HeapC > 0)
+            {
+                heaps.Add("c");
+            }
+
+            var count = heaps.Count;
+            if (count == 1)
+            {
+                return heaps[0];
+            }
+
+            var v = _rand.Next(1, count);
+            return heaps[v];
         }
     }
 }
