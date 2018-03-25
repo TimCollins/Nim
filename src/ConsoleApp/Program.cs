@@ -30,6 +30,12 @@ namespace ConsoleApp
 
                 Game.SaveInput(input);
                 Game.ProcessInput();
+
+                if (Game.Player == 2)
+                {
+                    Console.WriteLine("Computer player chose \"{0}\"", input);    
+                }
+
                 Game.UpdatePlayer();
 
                 if (Game.AllHeapsEmpty())
@@ -51,16 +57,21 @@ namespace ConsoleApp
         private static string GetInput()
         {
             Console.WriteLine("\nPlayer {0}'s turn", Game.Player);
-            Console.WriteLine("Enter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
-            Console.WriteLine("Enter \"quit\" to end the game");
-            Console.Write("\n> ");
-            return Console.ReadLine();
+            if (Game.Player == 1)
+            {
+                //Console.WriteLine("Enter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
+                //Console.WriteLine("Enter \"quit\" to end the game");
+                Console.Write("\n> ");
+                return Console.ReadLine();
+            }
+
+            return Game.GetRandomInput();
         }
 
         private static void DisplayInfoScreen()
         {
-            Console.Clear();
-            Console.WriteLine("Nim Game\n--------\nBe the last to take an object!\n");
+            //Console.Clear();
+            //Console.WriteLine("Nim Game\n--------\nBe the last to take an object!\n");
             Console.WriteLine("\nSize of heaps\nA\tB\tC");
             Console.WriteLine("{0}\t{1}\t{2}", Game.HeapA, Game.HeapB, Game.HeapC);
         }
