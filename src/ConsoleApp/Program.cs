@@ -25,6 +25,7 @@ namespace ConsoleApp
 
                 Game.SaveInput(input);
                 Game.ProcessInput();
+                Game.UpdatePlayer();
 
                 if (Game.AllHeapsEmpty())
                 {
@@ -32,12 +33,20 @@ namespace ConsoleApp
                 }
             }
 
+            DisplayWinner();
+
             ConsoleUtils.WaitForEscape();
         }
-        
+
+        private static void DisplayWinner()
+        {
+            Console.WriteLine("The winner is Player {0}", Game.Player);
+        }
+
         private static string GetInput()
         {
-            Console.WriteLine("\nEnter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
+            Console.WriteLine("\nPlayer {0}'s turn", Game.Player);
+            Console.WriteLine("Enter a heap and an amount e.g. \"a2\" to take two from heap A.\nThe maximum amount is 3.");
             Console.Write("\n> ");
             return Console.ReadLine();
         }

@@ -9,12 +9,15 @@ namespace ConsoleApp
         public int HeapC { get; set; }
         public string HeapInput { get; set; }
         public int HeapAmount { get; set; }
+        public int Player { get; set; }
         
         public void InitGame()
         {
             HeapA = 3;
             HeapB = 4;
             HeapC = 5;
+
+            Player = 1;
         }
 
         public void InitGame(int a, int b, int c)
@@ -22,6 +25,8 @@ namespace ConsoleApp
             HeapA = a;
             HeapB = b;
             HeapC = c;
+
+            Player = 1;
         }
 
         public void SaveInput(string input)
@@ -99,6 +104,17 @@ namespace ConsoleApp
             }
 
             throw new ApplicationException(string.Format("Invalid HeapInput \"{0}\" specified!", HeapInput));
+        }
+
+        public void UpdatePlayer()
+        {
+            if (AllHeapsEmpty())
+            {
+                // Don't update the player if there is a winner
+                return;
+            }
+
+            Player = Player == 1 ? 2 : 1;
         }
     }
 }
