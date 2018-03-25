@@ -79,13 +79,15 @@ namespace UnitTests
         {
             Game.HeapA = 2;
             Assert.IsTrue(Game.IsValidInput("a2"));
+            Assert.False(Game.IsValidInput("a3"));
 
             Game.HeapB = 1;
+            Assert.IsTrue(Game.IsValidInput("B1"));
             Assert.IsFalse(Game.IsValidInput("B2"));
 
-            Game.HeapC = 3;
+            Game.HeapC = 2;
             Assert.IsTrue(Game.IsValidInput("c1"));
+            Assert.IsFalse(Game.IsValidInput("c3"));
         }
-       
     }
 }

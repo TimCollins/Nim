@@ -95,7 +95,10 @@ namespace ConsoleApp
             if (HeapInput == "C")
             {
                 HeapC -= HeapAmount;
+                return;
             }
+
+            throw new ApplicationException(string.Format("Invalid HeapInput \"{0}\" specified!", HeapInput));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ConsoleApp;
+﻿using System;
+using ConsoleApp;
 using NUnit.Framework;
 
 namespace UnitTests
@@ -68,6 +69,14 @@ namespace UnitTests
             Game.ProcessInput();
 
             Assert.AreEqual(6, Game.HeapC);
+        }
+
+        [Test]
+        public void ExceptionShouldBeThrownIfInvalidHeapInput()
+        {
+            Game.HeapInput = "Z";
+
+            Assert.Throws<ApplicationException>(() => Game.ProcessInput());
         }
     }
 }
